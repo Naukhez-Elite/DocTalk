@@ -70,7 +70,7 @@ function initBotConversation() {
         return;
     }
     // Speech
-    var authorizationToken = await fetch('https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+    var authorizationToken = fetch('https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken',
                             {
                                 method: 'POST',
                                 headers: {
@@ -80,7 +80,7 @@ function initBotConversation() {
                                 }
                             }).then(response => response.text());
 
-webSpeechPonyfillFactory = await window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({ authorizationToken, region });
+webSpeechPonyfillFactory = window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({ authorizationToken, region });
     
     // extract the data from the JWT
     const jsonWebToken = this.response;
