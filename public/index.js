@@ -1,8 +1,5 @@
 const defaultLocale = 'en-US';
-//Create Speech 
-var subscriptionSp = "cc00c01ac05f4370806eba2180b7e19a";
-var region = "westus";
-let webSpeechPonyfillFactory;
+
 
 
 function requestChatBot(loc) {
@@ -70,6 +67,10 @@ function initBotConversation() {
         return;
     }
     // Speech
+    //Create Speech 
+var subscriptionSp = "cc00c01ac05f4370806eba2180b7e19a";
+var region = "westus";
+let webSpeechPonyfillFactory;
     var authorizationToken = fetch('https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken',
                             {
                                 method: 'POST',
