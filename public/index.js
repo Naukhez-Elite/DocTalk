@@ -1,4 +1,9 @@
 const defaultLocale = 'en-US';
+//Create Speech 
+var subscriptionSp = "cc00c01ac05f4370806eba2180b7e19a";
+var region = "westus";
+let webSpeechPonyfillFactory;
+
 
 function requestChatBot(loc) {
     const params = new URLSearchParams(location.search);
@@ -64,6 +69,19 @@ function initBotConversation() {
         alert(this.statusText);
         return;
     }
+    // Speech
+    var authorizationToken = await fetch('https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Ocp-Apim-Subscription-Key': subscriptionSp,
+                                    'Content-type': 'application/x-www-form-urlencoded',
+                                    'Content-Length': '0'
+                                }
+                            }).then(response => response.text());
+
+webSpeechPonyfillFactory = await window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({ authorizationToken, region });
+    
     // extract the data from the JWT
     const jsonWebToken = this.response;
     const tokenPayload = JSON.parse(atob(jsonWebToken.split('.')[1]));
